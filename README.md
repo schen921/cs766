@@ -35,3 +35,75 @@ Your Pages site will use the layout and styles from the Jekyll theme you have se
 ### Support or Contact
 
 Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+
+
+
+<div align="center">
+ <font size="20"> Object Detection for Swarm Mobile Robots using Computer Vision![Uploading image.png…]()
+</font><br>
+Siyang Chen, Sina Sadeghian, Vignesh Selvaraj<br>
+ University of Wisconsin-Madison<br>
+ {schen658, ssadeghian, vselvaraj}@wisc.edu
+</div>
+
+# Introduction
+
+Intro
+
+## Types of Visual Odometry
+
+* ### Monocular Visual Odometry
+
+
+* ### Stereo Visual Odometry
+
+
+# Algorithm Description
+
+<div align="center">
+<img src="./docs/schema.png" width="400" height="200">
+<br>Figure 1: Stereo Visual Odometry Pipeline<br>
+</div>
+
+* ## Input Image sequence
+
+#<div align="center">
+#<img src="./docs/1_FAST_features.png" width="900" height="300">
+#Figure 2: FAST Features<br>
+#</div>
+
+* ## Feature Tracking
+
+
+* ## 3D Point Cloud Generation
+
+
+* ## Inlier Detection
+
+
+* ## Motion Estimation
+
+
+#<div align="center">
+#<img src="./docs/reprojection.png" height="275">
+#<br>Figure 5: Image Reprojection : Wb --> Ja  and Wa --> Jb <br>
+#</div>
+
+# Results
+
+Results
+
+#<video src="./docs/demoVideo.mp4" width="900" height="350" controls preload></video>
+#<div align="center">Demo Video </div><br>
+
+
+
+# Discussion & Future work
+
+Discussion
+
+# References
+[1] X
+
+
+
