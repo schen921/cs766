@@ -26,7 +26,7 @@ The device used for this study is a Intel Real sense Depth camera.  The camera o
 Our project employs a software suite that creates a scaleable realtime-capable object detection pipeline that is suitable for lightweight hardware with limited onboard processing power. This suite is based on Tensorflow's object detection API and supports cumstomable models that could be swapped out conveniently to fit the demand for different object detecion needs and models that are a best fit to the robot onboard hardware. The workflow of the software is shown as below:
 
 <div align="center">
-<img src="./docs/workflow.png" width="800" height="400">
+<img src="./docs/workflow.png" width="600" height="200">
 <br>Figure 2: Object Detection Software Suite Workflow<br>
 </div>
 
