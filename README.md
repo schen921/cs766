@@ -20,24 +20,41 @@ The device used for this study is a Intel Real sense Depth camera.  The camera o
 <br>Figure 1: The communication between ROS package and OpenCV<br>
 </div>
 
+# Object Detection Software Suite
+
+## Implementation and Workflow
+Our project employs a software suite that creates a scaleable realtime-capable object detection pipeline that is suitable for lightweight hardware with limited onboard processing power. This suite is based on Tensorflow's object detection API and supports cumstomable models that could be swapped out conveniently to fit the demand for different object detecion needs and models that are a best fit to the robot onboard hardware. The workflow of the software is shown as below:
+
+<div align="center">
+<img src="./docs/workflow.png" width="400" height="200">
+<br>Figure 2: Object Detection Software Suite Workflow<br>
+</div>
+
+## Performance Optimization
+
+- Relatively lightweight models (such as SSDLite Mobilenet) were chosen for object detection for better performance on lightweight hardware.
+- These models could be swapped accordingly for better hardware available to deliver better performance (such as Faster R-CNN ResNet or EfficientDet etc).
+- Capturing frames of a camera-input using OpenCV in separate threads to increase performance
+- Have multithreading for the split session for better performance
+- Allows models to grow memory allocation
 
 # Circle Detection
 
-The primary objective of this task is to detect the circles in the RGB image, which corresponds to the holes on the object. This is enabled by first converting the RGB image to grey image, followed by applying median blur to remove sharp edges and shiny objects in the image, finally, hough circle detection algorithm with hough gradient is used to identify the circles on the RGB image. The parameters for the hough circles that are detected are determined based on a trial and error method. Since the camera provides a live stream of data at 30fps, the hough algorithm is applied to each individual frame separately. The detected circles are shown in Figure 2
+The primary objective of this task is to detect the circles in the RGB image, which corresponds to the holes on the object. This is enabled by first converting the RGB image to grey image, followed by applying median blur to remove sharp edges and shiny objects in the image, finally, hough circle detection algorithm with hough gradient is used to identify the circles on the RGB image. The parameters for the hough circles that are detected are determined based on a trial and error method. Since the camera provides a live stream of data at 30fps, the hough algorithm is applied to each individual frame separately. The detected circles are shown in Figure 3
 
 <div align="center">
 <img src="./docs/circle_detect.gif" width="400" height="200">
-<br>Figure 2: Hough Circle Detection<br>
+<br>Figure 3: Hough Circle Detection<br>
 </div>
 
 
 # Calculate Hole Size
 
-The primary objective of this task is to calculate the actual size of holes on the part using RGBand  depth  images.   First,  the  RGB  image  was  aligned  on  the  Depth  image  using  the  RealSense library.  Later,  the Hough Circle detection method was applied on the aligned RGB image,  and points on the circle were achieved.  By utilizing the depth data, converted the points on the RGB image to the cloud points.  Finally, we calculated the average distances of the corresponding points.The calculated size of the detected holes shown in Figure 3.  There is ± 0.1 mm tolerance between actual size of the hole and the predicted one.
+The primary objective of this task is to calculate the actual size of holes on the part using RGBand  depth  images.   First,  the  RGB  image  was  aligned  on  the  Depth  image  using  the  RealSense library.  Later,  the Hough Circle detection method was applied on the aligned RGB image,  and points on the circle were achieved.  By utilizing the depth data, converted the points on the RGB image to the cloud points.  Finally, we calculated the average distances of the corresponding points.The calculated size of the detected holes shown in Figure 4.  There is ± 0.1 mm tolerance between actual size of the hole and the predicted one.
 
 <div align="center">
 <img src="./docs/circle_size1.gif" width="400" height="200">
-<br>Figure 3: Calculated size of the Hole<br>
+<br>Figure 4: Calculated size of the Hole<br>
 </div>
 
 
