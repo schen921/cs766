@@ -1,3 +1,4 @@
+```
 ## Welcome to GitHub Pages
 
 You can use the [editor on GitHub](https://github.com/schen921/cs766/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
@@ -25,7 +26,7 @@ Syntax highlighted code block
 
 [Link](url) and ![Image](src)
 ```
-
+``
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
 ### Jekyll Themes
@@ -35,11 +36,11 @@ Your Pages site will use the layout and styles from the Jekyll theme you have se
 ### Support or Contact
 
 Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
-
+``
 
 
 <div align="center">
- <font size="20"> Object Detection for Swarm Mobile Robots using Computer Vision![Uploading image.png…]()
+ <font size="20"> Object Detection for Swarm Mobile Robots using Computer Vision()
 </font><br>
 Siyang Chen, Sina Sadeghian, Vignesh Selvaraj<br>
  University of Wisconsin-Madison<br>
@@ -48,11 +49,11 @@ Siyang Chen, Sina Sadeghian, Vignesh Selvaraj<br>
 
 # Introduction
 
-Intro
+Mobile robots with the capabilities to carry out fundamental manufacturing operations could havea huge impact in the way parts are produced.  Especially in the cases where conventional manufac-turing is difficult; moreover, mobile robots could collaborate with each other enabling networkedtask sharing and task scheduling .  The new ability makes this type of mobile robot superior com-pared to AGVs or mobile robots without arms, which leads to an increase in their applications inmodern industry.Obstacle and collision avoidance, object detection and estimating their size, ability to calculatecoordinates of a certain point on the object respect to its edges, ability to detected the center ofthe holes and their diameter are some of the challenges in this approach
 
 ## Types of Visual Odometry
 
-* ### Monocular Visual Odometry
+The device used for this study is a Intel Real sense Depth camera.  The camera outputs data inRGB  and  Depth.   Our  first  task  involved  interfacing  with  the  device.   We  used  ”pyrealsense2”and ”Opencv” to interface with the camera and extract the data.  The data is then packaged asa custom ROS image message as it it easy to interface with the embedded computer installed onthe robot.  The package is then sent to OpenCV for further analysis using the ”CvBridge”.  Theprocess of data acquisition and analysis is shown in Figure 1.
 
 
 * ### Stereo Visual Odometry
