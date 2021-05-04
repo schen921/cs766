@@ -1,100 +1,66 @@
-## Welcome to GitHub Pages
-
-You can use the [editor on GitHub](https://github.com/schen921/cs766/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/schen921/cs766/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
-
-
 
 <div align="center">
- <font size="20"> Object Detection for Swarm Mobile Robots using Computer Vision![Uploading image.png…]()
+ <font size="20"> Object Detection for Swarm Mobile Robots using Computer Vision()
 </font><br>
-Siyang Chen, Sina Sadeghian, Vignesh Selvaraj<br>
+ <font size="14">Siyang Chen, Sina Sadeghian, Vignesh Selvaraj</font><br>
  University of Wisconsin-Madison<br>
  {schen658, ssadeghian, vselvaraj}@wisc.edu
 </div>
 
 # Introduction
 
-Intro
+Mobile robots with the capabilities to carry out fundamental manufacturing operations could havea huge impact in the way parts are produced.  Especially in the cases where conventional manufac-turing is difficult; moreover, mobile robots could collaborate with each other enabling networkedtask sharing and task scheduling .  The new ability makes this type of mobile robot superior com-pared to AGVs or mobile robots without arms, which leads to an increase in their applications inmodern industry.Obstacle and collision avoidance, object detection and estimating their size, ability to calculatecoordinates of a certain point on the object respect to its edges, ability to detected the center ofthe holes and their diameter are some of the challenges in this approach
 
-## Types of Visual Odometry
+# Interfacing with the Device
 
-* ### Monocular Visual Odometry
-
-
-* ### Stereo Visual Odometry
-
-
-# Algorithm Description
+The device used for this study is a Intel Real sense Depth camera.  The camera outputs data inRGB  and  Depth.   Our  first  task  involved  interfacing  with  the  device.   We  used  ”pyrealsense2”and ”Opencv” to interface with the camera and extract the data.  The data is then packaged asa custom ROS image message as it it easy to interface with the embedded computer installed onthe robot.  The package is then sent to OpenCV for further analysis using the ”CvBridge”.  Theprocess of data acquisition and analysis is shown in Figure 1.
 
 <div align="center">
-<img src="./docs/schema.png" width="400" height="200">
-<br>Figure 1: Stereo Visual Odometry Pipeline<br>
+<img src="./docs/cvbridge.png" width="400" height="200">
+<br>Figure 1: The communication between ROS package and OpenCV<br>
 </div>
 
-* ## Input Image sequence
+# Object Detection Software Suite
 
-#<div align="center">
-#<img src="./docs/1_FAST_features.png" width="900" height="300">
-#Figure 2: FAST Features<br>
-#</div>
+## Implementation and Workflow
+Our project employs a software suite that creates a scaleable realtime-capable object detection pipeline that is suitable for lightweight hardware with limited onboard processing power. This suite is based on Tensorflow's object detection API and supports cumstomable models that could be swapped out conveniently to fit the demand for different object detecion needs and models that are a best fit to the robot onboard hardware. The workflow of the software is shown as below:
 
-* ## Feature Tracking
+<div align="center">
+<img src="./docs/workflow.png" width="600" height="200">
+<br>Figure 2: Object Detection Software Suite Workflow<br>
+</div>
+
+## Performance Optimization
+
+- Relatively lightweight models (such as SSDLite Mobilenet) were chosen for object detection for better performance on lightweight hardware.
+- These models could be swapped accordingly for better hardware available to deliver better performance (such as Faster R-CNN ResNet or EfficientDet etc).
+- Capturing frames of a camera-input using OpenCV in separate threads to increase performance
+- Have multithreading for the split session for better performance
+- Allows models to grow memory allocation
+
+# Circle Detection
+
+The primary objective of this task is to detect the circles in the RGB image, which corresponds to the holes on the object. This is enabled by first converting the RGB image to grey image, followed by applying median blur to remove sharp edges and shiny objects in the image, finally, hough circle detection algorithm with hough gradient is used to identify the circles on the RGB image. The parameters for the hough circles that are detected are determined based on a trial and error method. Since the camera provides a live stream of data at 30fps, the hough algorithm is applied to each individual frame separately. The detected circles are shown in Figure 3
+
+<div align="center">
+<img src="./docs/circle_detect.gif" width="400" height="200">
+<br>Figure 3: Hough Circle Detection<br>
+</div>
 
 
-* ## 3D Point Cloud Generation
+# Calculate Hole Size
 
+The primary objective of this task is to calculate the actual size of holes on the part using RGBand  depth  images.   First,  the  RGB  image  was  aligned  on  the  Depth  image  using  the  RealSense library.  Later,  the Hough Circle detection method was applied on the aligned RGB image,  and points on the circle were achieved.  By utilizing the depth data, converted the points on the RGB image to the cloud points.  Finally, we calculated the average distances of the corresponding points.The calculated size of the detected holes shown in Figure 4.  There is ± 0.1 mm tolerance between actual size of the hole and the predicted one.
 
-* ## Inlier Detection
+<div align="center">
+<img src="./docs/circle_size1.gif" width="400" height="200">
+<br>Figure 4: Calculated size of the Hole<br>
+</div>
 
-
-* ## Motion Estimation
-
-
-#<div align="center">
-#<img src="./docs/reprojection.png" height="275">
-#<br>Figure 5: Image Reprojection : Wb --> Ja  and Wa --> Jb <br>
-#</div>
 
 # Results
 
 Results
-
-#<video src="./docs/demoVideo.mp4" width="900" height="350" controls preload></video>
-#<div align="center">Demo Video </div><br>
 
 
 
@@ -103,6 +69,7 @@ Results
 Discussion
 
 # References
+
 [1] X
 
 
