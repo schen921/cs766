@@ -9,13 +9,13 @@
 
 # Introduction
 
-Mobile robots with the capabilities to carry out fundamental manufacturing operations could havea huge impact in the way parts are produced.  Especially in the cases where conventional manufac-turing is difficult; moreover, mobile robots could collaborate with each other enabling networkedtask sharing and task scheduling .  The new ability makes this type of mobile robot superior compared to AGVs or mobile robots without arms, which leads to an increase in their applications inmodern industry. Obstacle and collision avoidance, object detection and estimating their size, ability to calculatecoordinates of a certain point on the object respect to its edges, ability to detected the center ofthe holes and their diameter are some of the challenges in this approach. To address these challenges, our project is aiming to develope a capable object-detection suite that runs on swarm mobile robots and delivers decent performance given the robots' form factor and hardware. The objects detected here are mostly customed parts, which requires customly trained models for detection. In this case, the models used in this context needs to be easily expandable without loosing detection accuracies.
+Mobile robots with the capabilities to carry out fundamental manufacturing operations could have a huge impact in the way parts are produced. Especially in the cases where conventional manufacturing is difficult; moreover, mobile robots could collaborate with each other enabling networked task sharing and task scheduling .  The new ability makes this type of mobile robot superior compared to AGVs or mobile robots without arms, which leads to an increase in their applications in modern industry. Obstacle and collision avoidance, object detection and estimating their size, ability to detected the center of the holes and their diameter are some of the challenges in this approach. To address these challenges, our project is aiming to develope a capable object-detection suite that runs on swarm mobile robots and delivers decent performance given the robots' form factor and hardware. The objects detected here are mostly customed parts, which requires customly trained models for detection. In this case, the models used in this context needs to be easily expandable without loosing detection accuracies.
 
 # Project Settings
 
 ## Swarm Robot and Hardware
 
-The swarm robot we used in this project is shown in Figure 1. The robot is consisted with 1 NVIDIA Jetson Nano, 1 motor shield, 2 DC Motors, GPS Modules and 1 Intel Real Sense depth sensing onboard camera in a 10cm x 10cm x 10cm cubic centimeter form factor. The Jetson Nano packs a NVIDIA Maxwell GPU at 472 GFLOPs, paired with an ARM Cortex A-57 MPCore CPU. The total onboard RAM is 4GB. These hardwares gives our onboard micro-comupter liteweight processing capabilities that is a fraction of that in desktop GPUs and CPUs.
+The swarm robot we used in this project is shown in Figure 1. The robot is consisted with 1 NVIDIA Jetson Nano, 1 motor shield, 2 DC Motors, GPS Modules and 1 Intel Real Sense depth sensing onboard camera in a 10cm x 10cm x 10cm cubic centimeter form factor. The Jetson Nano packs a NVIDIA Maxwell GPU at 472 GFLOPs, paired with an ARM Cortex A-57 MPCore CPU. The total onboard RAM is 4GB. These hardwares gives our onboard micro-comupter light weight processing capabilities that is a fraction of that in desktop GPUs and CPUs.
 
 <div align="center">
 <img src="./docs/robot.png" width="400" height="400">
@@ -24,7 +24,7 @@ The swarm robot we used in this project is shown in Figure 1. The robot is consi
 
 ## Target Object
 
-The target object for our studyin setting will be parts in divers forms and shapes, and may or may not have holes on them. The target object selected for our project is shown in Figure 2. This object is a robot part that has un-uniform shapes, sides and holes distributed on its surface. We will train our models in detecting his object in this project.
+The target object for our studying setting will be parts in divers forms and shapes, and may or may not have holes on them. The target object selected for our project is shown in Figure 2. This object is a robot part that has ununiform shapes, sides and holes distributed on its surface. We will train our models in detecting its object in this project.
 
 <div align="center">
 <img src="./docs/object.png" width="400" height="400">
@@ -33,7 +33,7 @@ The target object for our studyin setting will be parts in divers forms and shap
 
 # Interfacing with the Device
 
-The device used for this study is a Intel Real sense Depth camera.  The camera outputs data inRGB  and  Depth.   Our  first  task  involved  interfacing  with  the  device.   We  used  ”pyrealsense2”and ”Opencv” to interface with the camera and extract the data.  The data is then packaged asa custom ROS image message as it it easy to interface with the embedded computer installed onthe robot.  The package is then sent to OpenCV for further analysis using the ”CvBridge”.  Theprocess of data acquisition and analysis is shown in Figure 3.
+The device used for this study is a Intel Real sense Depth camera.  The camera outputs data in RGB  and  Depth.   Our  first  task  involved  interfacing  with  the  device.   We  used  ”pyrealsense2” and ”Opencv” to interface with the camera and extract the data.  The data is then packaged as a custom ROS image message as it it easy to interface with the embedded computer installed onthe robot. The package is then sent to OpenCV for further analysis using the ”CvBridge”.  The process of data acquisition and analysis is shown in Figure 3.
 
 <div align="center">
 <img src="./docs/cvbridge.png" width="400" height="300">
@@ -64,7 +64,7 @@ For conducting transfer learning on the model, we freeze all intermediate layers
 # Object Detection Software Suite
 
 ## Workflow
-Our project employs a software suite that creates a scaleable realtime-capable object detection pipeline that is suitable for lightweight hardware with limited onboard processing power. This suite is based on Tensorflow's object detection API and supports cumstomable models that could be swapped out conveniently to fit the demand for different object detecion needs and models that are a best fit to the robot onboard hardware. The workflow of the software is shown as below:
+Our project employes a software suite that creates a scaleable realtime-capable object detection pipeline that is suitable for lightweight hardware with limited on-board processing power. This suite is based on Tensorflow's object detection API and supports customable models that could be swapped out conveniently to fit the demand for different object detecion needs and models that are a best fit to the robot on-board hardware. The workflow of the software is shown as below:
 
 <div align="center">
 <img src="./docs/workflow.png" width="600" height="200">
@@ -117,7 +117,7 @@ After voting, we can find local maxima in the accumulator matrix. The positions 
 
 # Hole Size Calculation
 
-The primary objective of this task is to calculate the actual size of holes on the part using RGB and depth images. First, the RGB image was aligned on the Depth image using the RealSense library. Later, the Hough Circle detection method was applied on the aligned RGB image. Then, we defined a boundary on each side of the circle and used average distance of each points on the boundary to aligning the camera with the hole. Next, points on the circle achieved using Hough data are shown in Figure x. By utilizing the depth data, converted the points on the RGB image to the cloud points shown in Figure x. Finally, we calculated the average distances of the corresponding points. 
+The primary objective of this task is to calculate the actual size of holes on the part using RGB and depth images. First, the RGB image were aligned on the Depth image using the RealSense library. Later, the Hough Circle detection method was applied on the aligned RGB image. Then, we defined a boundary on each side of the circle and used average distance of each points on the boundary to aligning the camera with the hole. Points on the circle achieved using Hough data are shown in Figure x. By utilizing the depth data, we converted the points on the RGB image to the cloud points as shown in Figure x. Finally, we calculated the average distances of the corresponding points. 
 
 
 <div align="center">
