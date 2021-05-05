@@ -2,7 +2,7 @@
 <div align="center">
  <font size="20"> Object Detection for Swarm Mobile Robots using Computer Vision
 </font><br>
- <font size="14">Siyang Chen, Sina Sadeghian, Vignesh Selvaraj</font><br>
+ <font size="12">Siyang Chen, Sina Sadeghian, Vignesh Selvaraj</font><br>
  University of Wisconsin-Madison<br>
  {schen658, ssadeghian, vselvaraj}@wisc.edu
 </div>
@@ -151,8 +151,8 @@ The key thing to be aware of in the results above is that, we are primarily conc
 </div>
 
 <div align="center">
-<img src="./docs/object_detection.gif" width="400" height="200">
-<br>Figure 3: Object detection results<br>
+<img src="./docs/detected_target.gif" width="400" height="200">
+<br>Figure 3: Detected Target Results<br>
 </div>
 
 ## Object Detection Results
