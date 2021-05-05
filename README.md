@@ -84,13 +84,13 @@ Our project employs a software suite that creates a scaleable realtime-capable o
 In a two-dimensional space, a circle can be described by:
 
 <div align="center">
-<img src="./docs/H_circle_eq.png" width="600" height="200">
+<img src="./docs/H_circle_eq.png" width="400" height="75">
 </div>
 
 where (a,b) is the center of the circle, and r is the radius. If a 2D point (x,y) is fixed, then the parameters can be found according to (1). The parameter space would be three dimensional, (a, b, r). And all the parameters that satisfy (x, y) would lie on the surface of an inverted right-angled cone whose apex is at (x, y, 0). In the 3D space, the circle parameters can be identified by the intersection of many conic surfaces that are defined by points on the 2D circle. This process can be divided into two stages. The first stage is fixing radius then find the optimal center of circles in a 2D parameter space. The second stage is to find the optimal radius in a one dimensional parameter space.
 
 <div align="center">
-<img src="./docs/Hough_circ.png" width="400" height="200">
+<img src="./docs/Hough_circ.png" width="400" height="400">
 <br>Figure 3: Center and Radius of circle on x-y axises<br>
 </div>
 
@@ -109,20 +109,27 @@ In practice, an accumulator matrix is introduced to find the intersection point 
 After voting, we can find local maxima in the accumulator matrix. The positions of the local maxima are corresponding to the circle centers in the original space.
 
 <div align="center">
-<img src="./docs/hough_many_circ.PNG" width="400" height="200">
- <img src="./docs/hough_many_circ2.PNG" width="400" height="200">
+<img src="./docs/hough_many_circ.PNG" width="400" height="400">
+ <img src="./docs/hough_many_circ2.PNG" width="400" height="400">
 <br>Figure 5: Accumulator of many Circles<br>
 </div>
 
 
-# Calculate Hole Size
+# Hole Size Calculation
 
-The primary objective of this task is to calculate the actual size of holes on the part using RGBand  depth  images.   First,  the  RGB  image  was  aligned  on  the  Depth  image  using  the  RealSense library.  Later,  the Hough Circle detection method was applied on the aligned RGB image,  and points on the circle were achieved.  By utilizing the depth data, converted the points on the RGB image to the cloud points.  Finally, we calculated the average distances of the corresponding points.The calculated size of the detected holes shown in Figure 4.  There is ± 0.1 mm tolerance between actual size of the hole and the predicted one.
+The primary objective of this task is to calculate the actual size of holes on the part using RGB and depth images. First, the RGB image was aligned on the Depth image using the RealSense library. Later, the Hough Circle detection method was applied on the aligned RGB image. Then, we defined a boundary on each side of the circle and used average distance of each points on the boundary to aligning the camera with the hole. Next, points on the circle achieved using Hough data are shown in Figure x. By utilizing the depth data, converted the points on the RGB image to the cloud points shown in Figure x. Finally, we calculated the average distances of the corresponding points. 
+
 
 <div align="center">
-<img src="./docs/circle_size1.gif" width="400" height="200">
-<br>Figure 4: Calculated size of the Hole<br>
+<img src="./docs/circle_dots.png.gif" width="400" height="200">
+<br>Figure 3: Cooresponding points on the circle<br>
 </div>
+
+<div align="center">
+<img src="./docs/circle_dots.png.gif" width="400" height="200">
+<br>Figure 3: Cloud Points of the RGB and Depth images<br>
+</div>
+
 
 
 # Results
@@ -147,19 +154,23 @@ The output of our object detection software suite is shown in Figure x below. Th
 The primary objective of this task is to detect the circles in the RGB image, which corresponds to the holes on the object. This is enabled by first converting the RGB image to grey image, followed by applying median blur to remove sharp edges and shiny objects in the image, finally, hough circle detection algorithm with hough gradient is used to identify the circles on the RGB image. The parameters for the hough circles that are detected are determined based on a trial and error method. Since the camera provides a live stream of data at 30fps, the hough algorithm is applied to each individual frame separately. The detected circles are shown in Figure 3
 
 <div align="center">
-<img src="./docs/circle_detect.gif" width="400" height="200">
+<img src="./docs/circle_detect.gif" width="400" height="400">
 <br>Figure 3: Hough Circle Detection<br>
 </div>
 
 ### 2. Circle Actual Size Calculator
 
-The primary objective of this task is to calculate the actual size of holes on the part using RGBand  depth  images.   First,  the  RGB  image  was  aligned  on  the  Depth  image  using  the  RealSense library.  Later,  the Hough Circle detection method was applied on the aligned RGB image,  and points on the circle were achieved.  By utilizing the depth data, converted the points on the RGB image to the cloud points.  Finally, we calculated the average distances of the corresponding points.The calculated size of the detected holes shown in Figure 4.  There is ± 0.1 mm tolerance between actual size of the hole and the predicted one.
+Figure x shows the calculated size of holes and their actual values. There is ± 0.1 mm tolerance between actual size of the hole and the predicted one. Therefore, the results look stable with low standard deviation. By tuning the Hough Circle detection parameters, circle detection could be improved, moreover, calibrating the camera would enhance the hole size detection.
 
 <div align="center">
-<img src="./docs/circle_size1.gif" width="400" height="200">
+<img src="./docs/circle_size1.gif" width="400" height="400">
+<img src="./docs/circle_size_ac1.gif" width="400" height="400">
+</div>
+<div align="center">
+<img src="./docs/circle_size2.gif" width="400" height="400">
+<img src="./docs/circle_size_ac2.gif" width="400" height="400">
 <br>Figure 4: Calculated size of the Hole<br>
 </div>
-
 
 # Discussion & Future work
 
