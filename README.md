@@ -121,7 +121,7 @@ The primary objective of this task is to calculate the actual size of holes on t
 
 
 <div align="center">
-<img src="./docs/circle_dots.png" width="400" height="300">
+<img src="./docs/circle_dots.png" width="300" height="300">
 <br>Figure 3: Cooresponding points on the circle<br>
 </div>
 
