@@ -18,7 +18,7 @@ Mobile robots with the capabilities to carry out fundamental manufacturing opera
 The swarm robot we used in this project is shown in Figure 1. The robot is consisted with 1 NVIDIA Jetson Nano, 1 motor shield, 2 DC Motors, GPS Modules and 1 Intel Real Sense depth sensing onboard camera in a 10cm x 10cm x 10cm cubic centimeter form factor. The Jetson Nano packs a NVIDIA Maxwell GPU at 472 GFLOPs, paired with an ARM Cortex A-57 MPCore CPU. The total onboard RAM is 4GB. These hardwares gives our onboard micro-comupter liteweight processing capabilities that is a fraction of that in desktop GPUs and CPUs.
 
 <div align="center">
-<img src="./docs/robot.png" width="200" height="400">
+<img src="./docs/robot.png" width="400" height="400">
 <br>Figure 1: Swarm Robot<br>
 </div>
 
@@ -27,7 +27,7 @@ The swarm robot we used in this project is shown in Figure 1. The robot is consi
 The target object for our studyin setting will be parts in divers forms and shapes, and may or may not have holes on them. The target object selected for our project is shown in Figure 2. This object is a robot part that has un-uniform shapes, sides and holes distributed on its surface. We will train our models in detecting his object in this project.
 
 <div align="center">
-<img src="./docs/object.png" width="200" height="400">
+<img src="./docs/object.png" width="400" height="400">
 <br>Figure 2: Target Object<br>
 </div>
 
@@ -36,7 +36,7 @@ The target object for our studyin setting will be parts in divers forms and shap
 The device used for this study is a Intel Real sense Depth camera.  The camera outputs data inRGB  and  Depth.   Our  first  task  involved  interfacing  with  the  device.   We  used  ”pyrealsense2”and ”Opencv” to interface with the camera and extract the data.  The data is then packaged asa custom ROS image message as it it easy to interface with the embedded computer installed onthe robot.  The package is then sent to OpenCV for further analysis using the ”CvBridge”.  Theprocess of data acquisition and analysis is shown in Figure 3.
 
 <div align="center">
-<img src="./docs/cvbridge.png" width="400" height="200">
+<img src="./docs/cvbridge.png" width="400" height="300">
 <br>Figure 3: The communication between ROS package and OpenCV<br>
 </div>
 
@@ -57,7 +57,7 @@ We used tool LabelImg to perform labeling of our processed data images. Every im
 For conducting transfer learning on the model, we freeze all intermediate layers (except the last 4 layers for segmentation, bounding box and classification) to keep existing weights on the edges (this is the main idea in transfer learning to 'reuse' much of the model and save time and potentially improve performance). We disable back propagation for the intermediate layers to stop those weights from being changed. We add a new output layer for classification and train our new model with the new processed data. This process is illustrated in Figure 4.
 
 <div align="center">
-<img src="./docs/transfer-learning-1024x574.jpg" width="600" height="200">
+<img src="./docs/transfer-learning-1024x574.jpg" width="600" height="300">
 <br>Figure 4: Transfer Learning Process<br>
 </div>
 
