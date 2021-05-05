@@ -1,29 +1,6 @@
 import pyrealsense2 as rs
 import numpy as np
 import cv2
-import os
-
-# For the Mask-RCNN model
-
-from mrcnn.config import Config
-from mrcnn.model import MaskRCNN
-from numpy import expand_dims
-
-from mrcnn.model import mold_image
-
-
-
-# define the prediction configuration
-class PredictionConfig(Config):
-
-    # define the name of the configuration
-    NAME = "part_cfg"
-    # number of classes (background + kangaroo)
-    NUM_CLASSES = 1 + 1
-    # simplify GPU config
-    GPU_COUNT = 1
-    IMAGES_PER_GPU = 1
-
 
 # Create a pipeline
 pipeline = rs.pipeline()
@@ -38,7 +15,7 @@ pipeline_profile = config.resolve(pipeline_wrapper)
 device = pipeline_profile.get_device()
 device_product_line = str(device.get_info(rs.camera_info.product_line))
 
-config.enable_stream(rs.stream.color, 640, 480, rs.format.rgb8, 30)
+config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
 
 # Start streaming
 profile = pipeline.start(config)
@@ -60,17 +37,8 @@ align_to = rs.stream.color
 align = rs.align(align_to)
 iter = 0
 
-# Load the model for inference
-# create config
-cfg = PredictionConfig()
-# define the model
-model_dir = os.path.join(os.getcwd(), "models")
-model = MaskRCNN(mode='inference', model_dir=model_dir, config=cfg)
-
-# load model weights
-weights_dir = os.path.join(os.getcwd(), "models",
-                           'mask_rcnn_part_cfg_0010.h5')
-model.load_weights(weights_dir, by_name=True)
+fourcc = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
+video_write = cv2.VideoWriter("raw_video.avi", fourcc, 30, (640, 480))
 
 
 # Streaming loop
@@ -92,29 +60,9 @@ try:
         # Get just the color frame
         color_image = np.asanyarray(color_frame.get_data())
 
-        ###################################################
-        # MaskRCNN Prediction
-        ###################################################
+        video_write.write(color_image)
 
-        # Predict for each frame -> One by one
-        # Convert pixel values
-        scaled_color_img = mold_image(color_image, cfg)
-        # Convert image to one sample
-        sample = expand_dims(scaled_color_img, 0)
-        # Make the prediction
-        yhat = model.detect(sample, verbose=0)
-
-        # Get the box parameters
-        try:
-            y1, x1, y2, x2 = yhat[0]["rois"][0]
-        except:
-            continue
-        #width, height = x2 - x1, y2 - y1
-        #rect = Rectangle((x1, y1), width, height, fill=False, color='red')
-        rec_color_image = cv2.rectangle(color_image, (x1, y1), (x2, y2), (255, 0, 0), 2)
-
-
-        cv2.imshow("RGB8 Image", rec_color_image)
+        cv2.imshow("RGB8 Image", color_image)
         cv2.waitKey(1)
 
         key = cv2.waitKey(1)
@@ -127,3 +75,4 @@ try:
 
 finally:
     pipeline.stop()
+

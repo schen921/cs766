@@ -136,12 +136,14 @@ The primary objective of this task is to calculate the actual size of holes on t
 
 ## Transfer Learning Results
 
-We performed transfer learning on the Mask R-CNN mocdel and is able to reach a high accuracy with low loss values as indicated in Figure X. The sample classification on our target object is shown in Figure X. We were able to detect the object with stable bounding boxes in decent frame rates. The result for real-time target object detection using the trasfer learning model we trained is shown in Figure X.
+We performed transfer learning on the Mask R-CNN mocdel and is able to reach a high accuracy with low loss values as indicated in Figure X. The sample classification on our target object is shown in Figure X. We were able to detect the object with stable bounding boxes in decent frame rates. The result for real-time target object detection using the transfer learning model we trained is shown in Figure X.
 
 <div align="center">
-<img src="./docs/object_detection.gif" width="400" height="200">
-<br>Figure 3: Training Loss <br>
+<img src="./docs/TF_results.png" width="800" height="100">
+<br>Figure 3: Transfer Learning Results <br>
 </div>
+
+The key thing to be aware of in the results above is that, we are primarily concerned about the "mrcnn_class_loss" and the "mrcnn_bbox_loss". The "mrcnn_class_loss" corresponds to the ability of the model to identify the class of the object in the frame accurately. The "mrcnn_bbox_loss" corresponds to the ability of the model to place the bounding boxes around the identified objects accurately. The third one, "mrcnn_mask_loss", is the ability of the model to create a mask around the object accurately. This is the highest of all three losses mainly because in our case we are not concerned about the model's ability to create the masks accurately, we are only looking for the model's ability to identify the object and a create a bounding box around it. Hence while training, the backpropagation updates to the branches of the model that involve creating the mask has been omitted during the training process.
 
 <div align="center">
 <img src="./docs/model_prediction_results/04.png" width="400" height="200">
