@@ -9,7 +9,11 @@
 
 # Introduction
 
-Mobile robots with the capabilities to carry out fundamental manufacturing operations could havea huge impact in the way parts are produced.  Especially in the cases where conventional manufac-turing is difficult; moreover, mobile robots could collaborate with each other enabling networkedtask sharing and task scheduling .  The new ability makes this type of mobile robot superior com-pared to AGVs or mobile robots without arms, which leads to an increase in their applications inmodern industry.Obstacle and collision avoidance, object detection and estimating their size, ability to calculatecoordinates of a certain point on the object respect to its edges, ability to detected the center ofthe holes and their diameter are some of the challenges in this approach
+Mobile robots with the capabilities to carry out fundamental manufacturing operations could havea huge impact in the way parts are produced.  Especially in the cases where conventional manufac-turing is difficult; moreover, mobile robots could collaborate with each other enabling networkedtask sharing and task scheduling .  The new ability makes this type of mobile robot superior compared to AGVs or mobile robots without arms, which leads to an increase in their applications inmodern industry. Obstacle and collision avoidance, object detection and estimating their size, ability to calculatecoordinates of a certain point on the object respect to its edges, ability to detected the center ofthe holes and their diameter are some of the challenges in this approach. To address these challenges, our project is aiming to develope a capable object-detection suite that runs on swarm mobile robots and delivers decent performance given the robots' form factor and hardware. The objects detected here are mostly customed parts, which requires customly trained models for detection. In this case, the models used in this context needs to be easily expandable without loosing detection accuracies.
+
+# Swarm Robot Hardwares
+
+********* Discuss our robot hardware here (specs and processing power) **********
 
 # Interfacing with the Device
 
@@ -19,6 +23,23 @@ The device used for this study is a Intel Real sense Depth camera.  The camera o
 <img src="./docs/cvbridge.png" width="400" height="200">
 <br>Figure 1: The communication between ROS package and OpenCV<br>
 </div>
+
+# Model Training and Transfer Learning
+
+In this project we performed transfer learning on models to expand the object classes in detection. This transfer learning method reuses a pre-trained model as the starting point to train new models for second tasks. This method is great for our setting to expand detectable class when adding new target objects, resulting in customed models that are capable of detecting new objects when the amount of new objects (classes) we are adding is not too large. To perform transfer learning, the regular steps of training a model is followed including data collection, data processing and data labeling with an additional step to prepare a pre-trained model to reuse. In our project, we selected the Mask R-CNN model as our base model for transfer learning. Our objective is to perform transfer learning on the Mask R-CNN model and expand its detection class to incdlude our customed target object without significant loss in object recognition accuracy.
+
+## Data Collection and Processing
+
+We selected 340 clear, un-blocked images of our target object in different angles, backgrounds and environment lighting as our raw data for transfer learning. These images are of diverse sizes and resolutions, so we performed pre-prosessing of the images to resize all images to 302 x 402 pixels. We then split all images with a 90/10 training/testing set split. These data are then ready to be labeled for our target object.
+
+## Data Labeling
+
+We used tool LabelImg to perform labeling of our processed data images. Every image in this phase is labeled with the target object being selected with a bounding box and given the label name. This will generate an XML file for each image with info describing the label name, locations of the bounding boxes specified by pixels and etc. This labeling process was done for both the traning set and testing set.
+
+## Model Training
+
+********* TODO **********
+
 
 # Object Detection Software Suite
 
@@ -60,8 +81,17 @@ The primary objective of this task is to calculate the actual size of holes on t
 
 # Results
 
-Results
+## Transfer Learning Results
 
+********* Transfer Learning Results **********
+
+## Object Detection Results
+
+********* Object Detection Results **********
+
+## Circle Detection Results
+
+********* Dircle Detection Results **********
 
 
 # Discussion & Future work
