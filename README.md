@@ -84,13 +84,13 @@ Our project employs a software suite that creates a scaleable realtime-capable o
 In a two-dimensional space, a circle can be described by:
 
 <div align="center">
-<img src="./docs/H_circle_eq.png" width="400" height="75">
+<img src="./docs/H_circle_eq.png" width="300" height="50">
 </div>
 
 where (a,b) is the center of the circle, and r is the radius. If a 2D point (x,y) is fixed, then the parameters can be found according to (1). The parameter space would be three dimensional, (a, b, r). And all the parameters that satisfy (x, y) would lie on the surface of an inverted right-angled cone whose apex is at (x, y, 0). In the 3D space, the circle parameters can be identified by the intersection of many conic surfaces that are defined by points on the 2D circle. This process can be divided into two stages. The first stage is fixing radius then find the optimal center of circles in a 2D parameter space. The second stage is to find the optimal radius in a one dimensional parameter space.
 
 <div align="center">
-<img src="./docs/Hough_circ.png" width="400" height="400">
+<img src="./docs/Hough_circ.png" width="300" height="300">
 <br>Figure 3: Center and Radius of circle on x-y axises<br>
 </div>
 
@@ -109,8 +109,8 @@ In practice, an accumulator matrix is introduced to find the intersection point 
 After voting, we can find local maxima in the accumulator matrix. The positions of the local maxima are corresponding to the circle centers in the original space.
 
 <div align="center">
-<img src="./docs/hough_many_circ.PNG" width="400" height="400">
- <img src="./docs/hough_many_circ2.PNG" width="400" height="400">
+<img src="./docs/hough_many_circ.PNG" width="400" height="300">
+ <img src="./docs/hough_many_circ2.PNG" width="400" height="300">
 <br>Figure 5: Accumulator of many Circles<br>
 </div>
 
@@ -121,12 +121,12 @@ The primary objective of this task is to calculate the actual size of holes on t
 
 
 <div align="center">
-<img src="./docs/circle_dots.png.gif" width="400" height="200">
+<img src="./docs/circle_dots.png.png" width="400" height="200">
 <br>Figure 3: Cooresponding points on the circle<br>
 </div>
 
 <div align="center">
-<img src="./docs/circle_dots.png.gif" width="400" height="200">
+<img src="./docs/circle_dots.png.png" width="400" height="200">
 <br>Figure 3: Cloud Points of the RGB and Depth images<br>
 </div>
 
@@ -163,12 +163,12 @@ The primary objective of this task is to detect the circles in the RGB image, wh
 Figure x shows the calculated size of holes and their actual values. There is ± 0.1 mm tolerance between actual size of the hole and the predicted one. Therefore, the results look stable with low standard deviation. By tuning the Hough Circle detection parameters, circle detection could be improved, moreover, calibrating the camera would enhance the hole size detection.
 
 <div align="center">
-<img src="./docs/circle_size1.gif" width="400" height="400">
-<img src="./docs/circle_size_ac1.gif" width="400" height="400">
+<img src="./docs/circle_size1.gif" width="500" height="200">
+<img src="./docs/circle_size_ac1.png" width="300" height="200">
 </div>
 <div align="center">
-<img src="./docs/circle_size2.gif" width="400" height="400">
-<img src="./docs/circle_size_ac2.gif" width="400" height="400">
+<img src="./docs/circle_size2.gif" width="500" height="200">
+<img src="./docs/circle_size_ac2.png" width="300" height="200">
 <br>Figure 4: Calculated size of the Hole<br>
 </div>
 
