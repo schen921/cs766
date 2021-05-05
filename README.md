@@ -136,7 +136,22 @@ The primary objective of this task is to calculate the actual size of holes on t
 
 ## Transfer Learning Results
 
-********* Transfer Learning Results **********
+We performed transfer learning on the Mask R-CNN mocdel and is able to reach a high accuracy with low loss values as indicated in Figure X. The sample classification on our target object is shown in Figure X. We were able to detect the object with stable bounding boxes in decent frame rates. The result for real-time target object detection using the trasfer learning model we trained is shown in Figure X.
+
+<div align="center">
+<img src="./docs/object_detection.gif" width="400" height="200">
+<br>Figure 3: Training Loss <br>
+</div>
+
+<div align="center">
+<img src="./docs/model_prediction_results/04.png" width="400" height="200">
+<br>Figure 3: Detection on Target Object with Bounding Box<br>
+</div>
+
+<div align="center">
+<img src="./docs/object_detection.gif" width="400" height="200">
+<br>Figure 3: Object detection results<br>
+</div>
 
 ## Object Detection Results
 
