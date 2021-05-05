@@ -146,12 +146,12 @@ We performed transfer learning on the Mask R-CNN mocdel and is able to reach a h
 The key thing to be aware of in the results above is that, we are primarily concerned about the "mrcnn_class_loss" and the "mrcnn_bbox_loss". The "mrcnn_class_loss" corresponds to the ability of the model to identify the class of the object in the frame accurately. The "mrcnn_bbox_loss" corresponds to the ability of the model to place the bounding boxes around the identified objects accurately. The third one, "mrcnn_mask_loss", is the ability of the model to create a mask around the object accurately. This is the highest of all three losses mainly because in our case we are not concerned about the model's ability to create the masks accurately, we are only looking for the model's ability to identify the object and a create a bounding box around it. Hence while training, the backpropagation updates to the branches of the model that involve creating the mask has been omitted during the training process.
 
 <div align="center">
-<img src="./docs/model_prediction_results/04.png" width="400" height="200">
+<img src="./docs/model_prediction_results/04.png" width="500" height="400">
 <br>Figure 12: Detection on Target Object with Bounding Box<br>
 </div>
 
 <div align="center">
-<img src="./docs/detected_target.gif" width="400" height="200">
+<img src="./docs/detected_target.gif" width="500" height="400">
 <br>Figure 13: Detected Target Results<br>
 </div>
 
