@@ -31,7 +31,7 @@ The target object for our studying setting will be parts in divers forms and sha
 <br>Figure 2: Target Object<br>
 </div>
 
-# Interfacing with the Device
+## Interfacing with the Device
 
 The device used for this study is a Intel Real sense Depth camera.  The camera outputs data in RGB  and  Depth.   Our  first  task  involved  interfacing  with  the  device.   We  used  ”pyrealsense2” and ”Opencv” to interface with the camera and extract the data.  The data is then packaged as a custom ROS image message as it it easy to interface with the embedded computer installed onthe robot. The package is then sent to OpenCV for further analysis using the ”CvBridge”.  The process of data acquisition and analysis is shown in Figure 3.
 
@@ -144,7 +144,7 @@ The output of our object detection software suite is shown in Figure x below. Th
 
 <div align="center">
 <img src="./docs/object_detection.gif" width="400" height="200">
-<br>Figure 3: Hough Circle Detection<br>
+<br>Figure 3: Object detection results<br>
 </div>
 
 ## Circle Detection Results
