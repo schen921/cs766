@@ -133,7 +133,12 @@ The primary objective of this task is to calculate the actual size of holes on t
 
 ## Object Detection Results
 
-********* Object Detection Results **********
+The output of our object detection software suite is shown in Figure x below. The pipeline creates a stream of frames at decent frame rate (approximately ~30 fps when using smaller models) without significant lost in classification accuracy. This frame rate makes the object detection useable to keep track of our target object and avoid potential obstacles. The resolution delivered is also fairly well given the harware resources that our software utilizes. The bounding boxes are accurate and has good tracking capabilities with the movements between frames, indicating a stable and well-performed model working in the background. With the performance optimization mechanisms in place this 30 fps peak frame rate is approximately performing ~10x better without opimizations.
+
+<div align="center">
+<img src="./docs/object_detection.gif" width="400" height="200">
+<br>Figure 3: Hough Circle Detection<br>
+</div>
 
 ## Circle Detection Results
 
