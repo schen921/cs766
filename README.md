@@ -169,7 +169,7 @@ With our current acheivements, we think we could still polish our works in the f
 - Expand the training and testing dataset for better accuracy
 - Fine tune in training parameters
 
-In general, the project had been successful with all parts completed as planned and the performance and results delivered meets our expectation. We wish to keep working on further improvements to make it a more stable, reliable and high-performance real time object detection pipeline solution that applied to ROS and other systems.
+In general, the project had been successful with all parts completed as planned and the performance and results delivered meets our expectation. We wish to keep working on further improvements to make it a more stable, reliable and high-performance real time object detection pipeline solution that applies to ROS and other systems.
 
 
 # References
