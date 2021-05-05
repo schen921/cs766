@@ -9,13 +9,13 @@
 
 # Introduction
 
-Mobile robots with the capabilities to carry out fundamental manufacturing operations could havea huge impact in the way parts are produced.  Especially in the cases where conventional manufac-turing is difficult; moreover, mobile robots could collaborate with each other enabling networkedtask sharing and task scheduling .  The new ability makes this type of mobile robot superior compared to AGVs or mobile robots without arms, which leads to an increase in their applications inmodern industry. Obstacle and collision avoidance, object detection and estimating their size, ability to calculatecoordinates of a certain point on the object respect to its edges, ability to detected the center ofthe holes and their diameter are some of the challenges in this approach. To address these challenges, our project is aiming to develope a capable object-detection suite that runs on swarm mobile robots and delivers decent performance given the robots' form factor and hardware. The objects detected here are mostly customed parts, which requires customly trained models for detection. In this case, the models used in this context needs to be easily expandable without loosing detection accuracies.
+Mobile robots with the capabilities to carry out fundamental manufacturing operations could have a huge impact in the way parts are produced. Especially in the cases where conventional manufacturing is difficult; moreover, mobile robots could collaborate with each other enabling networked task sharing and task scheduling .  The new ability makes this type of mobile robot superior compared to AGVs or mobile robots without arms, which leads to an increase in their applications in modern industry. Obstacle and collision avoidance, object detection and estimating their size, ability to detected the center of the holes and their diameter are some of the challenges in this approach. To address these challenges, our project is aiming to develope a capable object-detection suite that runs on swarm mobile robots and delivers decent performance given the robots' form factor and hardware. The objects detected here are mostly customed parts, which requires customly trained models for detection. In this case, the models used in this context needs to be easily expandable without loosing detection accuracies.
 
 # Project Settings
 
 ## Swarm Robot and Hardware
 
-The swarm robot we used in this project is shown in Figure 1. The robot is consisted with 1 NVIDIA Jetson Nano, 1 motor shield, 2 DC Motors, GPS Modules and 1 Intel Real Sense depth sensing onboard camera in a 10cm x 10cm x 10cm cubic centimeter form factor. The Jetson Nano packs a NVIDIA Maxwell GPU at 472 GFLOPs, paired with an ARM Cortex A-57 MPCore CPU. The total onboard RAM is 4GB. These hardwares gives our onboard micro-comupter liteweight processing capabilities that is a fraction of that in desktop GPUs and CPUs.
+The swarm robot we used in this project is shown in Figure 1. The robot is consisted with 1 NVIDIA Jetson Nano, 1 motor shield, 2 DC Motors, GPS Modules and 1 Intel Real Sense depth sensing onboard camera in a 10cm x 10cm x 10cm cubic centimeter form factor. The Jetson Nano packs a NVIDIA Maxwell GPU at 472 GFLOPs, paired with an ARM Cortex A-57 MPCore CPU. The total onboard RAM is 4GB. These hardwares gives our onboard micro-comupter light weight processing capabilities that is a fraction of that in desktop GPUs and CPUs.
 
 <div align="center">
 <img src="./docs/robot.png" width="400" height="400">
@@ -24,16 +24,16 @@ The swarm robot we used in this project is shown in Figure 1. The robot is consi
 
 ## Target Object
 
-The target object for our studyin setting will be parts in divers forms and shapes, and may or may not have holes on them. The target object selected for our project is shown in Figure 2. This object is a robot part that has un-uniform shapes, sides and holes distributed on its surface. We will train our models in detecting his object in this project.
+The target object for our studying setting will be parts in divers forms and shapes, and may or may not have holes on them. The target object selected for our project is shown in Figure 2. This object is a robot part that has ununiform shapes, sides and holes distributed on its surface. We will train our models in detecting its object in this project.
 
 <div align="center">
 <img src="./docs/object.png" width="400" height="400">
 <br>Figure 2: Target Object<br>
 </div>
 
-# Interfacing with the Device
+## Interfacing with the Device
 
-The device used for this study is a Intel Real sense Depth camera.  The camera outputs data inRGB  and  Depth.   Our  first  task  involved  interfacing  with  the  device.   We  used  ”pyrealsense2”and ”Opencv” to interface with the camera and extract the data.  The data is then packaged asa custom ROS image message as it it easy to interface with the embedded computer installed onthe robot.  The package is then sent to OpenCV for further analysis using the ”CvBridge”.  Theprocess of data acquisition and analysis is shown in Figure 3.
+The device used for this study is a Intel Real sense Depth camera.  The camera outputs data in RGB  and  Depth.   Our  first  task  involved  interfacing  with  the  device.   We  used  ”pyrealsense2” and ”Opencv” to interface with the camera and extract the data.  The data is then packaged as a custom ROS image message as it it easy to interface with the embedded computer installed onthe robot. The package is then sent to OpenCV for further analysis using the ”CvBridge”.  The process of data acquisition and analysis is shown in Figure 3.
 
 <div align="center">
 <img src="./docs/cvbridge.png" width="400" height="300">
@@ -64,7 +64,7 @@ For conducting transfer learning on the model, we freeze all intermediate layers
 # Object Detection Software Suite
 
 ## Workflow
-Our project employs a software suite that creates a scaleable realtime-capable object detection pipeline that is suitable for lightweight hardware with limited onboard processing power. This suite is based on Tensorflow's object detection API and supports cumstomable models that could be swapped out conveniently to fit the demand for different object detecion needs and models that are a best fit to the robot onboard hardware. The workflow of the software is shown as below:
+Our project employes a software suite that creates a scaleable realtime-capable object detection pipeline that is suitable for lightweight hardware with limited on-board processing power. This suite is based on Tensorflow's object detection API and supports customable models that could be swapped out conveniently to fit the demand for different object detecion needs and models that are a best fit to the robot on-board hardware. The workflow of the software is shown as below:
 
 <div align="center">
 <img src="./docs/workflow.png" width="600" height="200">
@@ -84,13 +84,13 @@ Our project employs a software suite that creates a scaleable realtime-capable o
 In a two-dimensional space, a circle can be described by:
 
 <div align="center">
-<img src="./docs/H_circle_eq.png" width="600" height="200">
+<img src="./docs/H_circle_eq.png" width="300" height="50">
 </div>
 
 where (a,b) is the center of the circle, and r is the radius. If a 2D point (x,y) is fixed, then the parameters can be found according to (1). The parameter space would be three dimensional, (a, b, r). And all the parameters that satisfy (x, y) would lie on the surface of an inverted right-angled cone whose apex is at (x, y, 0). In the 3D space, the circle parameters can be identified by the intersection of many conic surfaces that are defined by points on the 2D circle. This process can be divided into two stages. The first stage is fixing radius then find the optimal center of circles in a 2D parameter space. The second stage is to find the optimal radius in a one dimensional parameter space.
 
 <div align="center">
-<img src="./docs/Hough_circ.png" width="400" height="200">
+<img src="./docs/Hough_circ.png" width="300" height="300">
 <br>Figure 3: Center and Radius of circle on x-y axises<br>
 </div>
 
@@ -109,27 +109,49 @@ In practice, an accumulator matrix is introduced to find the intersection point 
 After voting, we can find local maxima in the accumulator matrix. The positions of the local maxima are corresponding to the circle centers in the original space.
 
 <div align="center">
-<img src="./docs/hough_many_circ.PNG" width="400" height="200">
- <img src="./docs/hough_many_circ2.PNG" width="400" height="200">
+<img src="./docs/hough_many_circ.PNG" width="400" height="300">
+ <img src="./docs/hough_many_circ2.PNG" width="400" height="300">
 <br>Figure 5: Accumulator of many Circles<br>
 </div>
 
 
-# Calculate Hole Size
+# Hole Size Calculation
 
-The primary objective of this task is to calculate the actual size of holes on the part using RGBand  depth  images.   First,  the  RGB  image  was  aligned  on  the  Depth  image  using  the  RealSense library.  Later,  the Hough Circle detection method was applied on the aligned RGB image,  and points on the circle were achieved.  By utilizing the depth data, converted the points on the RGB image to the cloud points.  Finally, we calculated the average distances of the corresponding points.The calculated size of the detected holes shown in Figure 4.  There is ± 0.1 mm tolerance between actual size of the hole and the predicted one.
+The primary objective of this task is to calculate the actual size of holes on the part using RGB and depth images. First, the RGB image were aligned on the Depth image using the RealSense library. Later, the Hough Circle detection method was applied on the aligned RGB image. Then, we defined a boundary on each side of the circle and used average distance of each points on the boundary to aligning the camera with the hole. Points on the circle achieved using Hough data are shown in Figure x. By utilizing the depth data, we converted the points on the RGB image to the cloud points as shown in Figure x. Finally, we calculated the average distances of the corresponding points. 
+
 
 <div align="center">
-<img src="./docs/circle_size1.gif" width="400" height="200">
-<br>Figure 4: Calculated size of the Hole<br>
+<img src="./docs/circle_dots.png" width="300" height="300">
+<br>Figure 3: Cooresponding points on the circle<br>
 </div>
+
+<div align="center">
+<img src="./docs/circle_dots.png" width="400" height="200">
+<br>Figure 3: Cloud Points of the RGB and Depth images<br>
+</div>
+
 
 
 # Results
 
 ## Transfer Learning Results
 
-********* Transfer Learning Results **********
+We performed transfer learning on the Mask R-CNN mocdel and is able to reach a high accuracy with low loss values as indicated in Figure X. The sample classification on our target object is shown in Figure X. We were able to detect the object with stable bounding boxes in decent frame rates. The result for real-time target object detection using the trasfer learning model we trained is shown in Figure X.
+
+<div align="center">
+<img src="./docs/object_detection.gif" width="400" height="200">
+<br>Figure 3: Training Loss <br>
+</div>
+
+<div align="center">
+<img src="./docs/model_prediction_results/04.png" width="400" height="200">
+<br>Figure 3: Detection on Target Object with Bounding Box<br>
+</div>
+
+<div align="center">
+<img src="./docs/object_detection.gif" width="400" height="200">
+<br>Figure 3: Object detection results<br>
+</div>
 
 ## Object Detection Results
 
@@ -137,7 +159,7 @@ The output of our object detection software suite is shown in Figure x below. Th
 
 <div align="center">
 <img src="./docs/object_detection.gif" width="400" height="200">
-<br>Figure 3: Hough Circle Detection<br>
+<br>Figure 3: Object detection results<br>
 </div>
 
 ## Circle Detection Results
@@ -147,19 +169,23 @@ The output of our object detection software suite is shown in Figure x below. Th
 The primary objective of this task is to detect the circles in the RGB image, which corresponds to the holes on the object. This is enabled by first converting the RGB image to grey image, followed by applying median blur to remove sharp edges and shiny objects in the image, finally, hough circle detection algorithm with hough gradient is used to identify the circles on the RGB image. The parameters for the hough circles that are detected are determined based on a trial and error method. Since the camera provides a live stream of data at 30fps, the hough algorithm is applied to each individual frame separately. The detected circles are shown in Figure 3
 
 <div align="center">
-<img src="./docs/circle_detect.gif" width="400" height="200">
+<img src="./docs/circle_detect.gif" width="400" height="400">
 <br>Figure 3: Hough Circle Detection<br>
 </div>
 
 ### 2. Circle Actual Size Calculator
 
-The primary objective of this task is to calculate the actual size of holes on the part using RGBand  depth  images.   First,  the  RGB  image  was  aligned  on  the  Depth  image  using  the  RealSense library.  Later,  the Hough Circle detection method was applied on the aligned RGB image,  and points on the circle were achieved.  By utilizing the depth data, converted the points on the RGB image to the cloud points.  Finally, we calculated the average distances of the corresponding points.The calculated size of the detected holes shown in Figure 4.  There is ± 0.1 mm tolerance between actual size of the hole and the predicted one.
+Figure x shows the calculated size of holes and their actual values. There is ± 0.1 mm tolerance between actual size of the hole and the predicted one. Therefore, the results look stable with low standard deviation. By tuning the Hough Circle detection parameters, circle detection could be improved, moreover, calibrating the camera would enhance the hole size detection.
 
 <div align="center">
-<img src="./docs/circle_size1.gif" width="400" height="200">
+<img src="./docs/circle_size1.gif" width="500" height="200">
+<img src="./docs/circle_size_ac1.png" width="300" height="200">
+</div>
+<div align="center">
+<img src="./docs/circle_size2.gif" width="500" height="200">
+<img src="./docs/circle_size_ac2.png" width="300" height="200">
 <br>Figure 4: Calculated size of the Hole<br>
 </div>
-
 
 # Discussion & Future work
 
