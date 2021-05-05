@@ -121,12 +121,12 @@ The primary objective of this task is to calculate the actual size of holes on t
 
 
 <div align="center">
-<img src="./docs/circle_dots.png.png" width="400" height="200">
+<img src="./docs/circle_dots.png" width="400" height="200">
 <br>Figure 3: Cooresponding points on the circle<br>
 </div>
 
 <div align="center">
-<img src="./docs/circle_dots.png.png" width="400" height="200">
+<img src="./docs/circle_dots.png" width="400" height="200">
 <br>Figure 3: Cloud Points of the RGB and Depth images<br>
 </div>
 
