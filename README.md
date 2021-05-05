@@ -59,13 +59,39 @@ Our project employs a software suite that creates a scaleable realtime-capable o
 - Have multithreading for the split session for better performance
 - Allows models to grow memory allocation
 
-# Circle Detection
+# Circle Hoguh Transform
 
-The primary objective of this task is to detect the circles in the RGB image, which corresponds to the holes on the object. This is enabled by first converting the RGB image to grey image, followed by applying median blur to remove sharp edges and shiny objects in the image, finally, hough circle detection algorithm with hough gradient is used to identify the circles on the RGB image. The parameters for the hough circles that are detected are determined based on a trial and error method. Since the camera provides a live stream of data at 30fps, the hough algorithm is applied to each individual frame separately. The detected circles are shown in Figure 3
+In a two-dimensional space, a circle can be described by:
 
 <div align="center">
-<img src="./docs/circle_detect.gif" width="400" height="200">
-<br>Figure 3: Hough Circle Detection<br>
+<img src="./docs/H_circle_eq.png" width="600" height="200">
+</div>
+
+where (a,b) is the center of the circle, and r is the radius. If a 2D point (x,y) is fixed, then the parameters can be found according to (1). The parameter space would be three dimensional, (a, b, r). And all the parameters that satisfy (x, y) would lie on the surface of an inverted right-angled cone whose apex is at (x, y, 0). In the 3D space, the circle parameters can be identified by the intersection of many conic surfaces that are defined by points on the 2D circle. This process can be divided into two stages. The first stage is fixing radius then find the optimal center of circles in a 2D parameter space. The second stage is to find the optimal radius in a one dimensional parameter space.
+
+<div align="center">
+<img src="./docs/Hough_circ.png" width="400" height="200">
+<br>Figure 3: Center and Radius of circle on x-y axises<br>
+</div>
+
+* ## Find parameters with known radius R
+
+If the radius is fixed, then the parameter space would be reduced to 2D (the position of the circle center). For each point (x, y) on the original circle, it can define a circle centered at (x, y) with radius R according to (1). The intersection point of all such circles in the parameter space would be corresponding to the center point of the original circle.
+
+<div align="center">
+<img src="./docs/hough_circ_2.png" width="400" height="200">
+<br>Figure 4: (x,y) coordinates in 3D space<br>
+</div>
+
+* ## Accumulator matrix and voting
+
+In practice, an accumulator matrix is introduced to find the intersection point in the parameter space. First, we need to divide the parameter space into “buckets” using a grid and produce an accumulator matrix according to the grid. The element in the accumulator matrix denotes the number of “circles” in the parameter space that passing through the corresponding grid cell in the parameter space. The number is also called “voting number”. Initially, every element in the matrix is zeros. Then for each “edge” point in the original space, we can formulate a circle in the parameter space and increase the voting number of the grid cell which the circle passes through. This process is called “voting”.
+After voting, we can find local maxima in the accumulator matrix. The positions of the local maxima are corresponding to the circle centers in the original space.
+
+<div align="center">
+<img src="./docs/hough_many_circ.PNG" width="400" height="200">
+ <img src="./docs/hough_many_circ2.PNG" width="400" height="200">
+<br>Figure 5: Accumulator of many Circles<br>
 </div>
 
 
@@ -91,7 +117,23 @@ The primary objective of this task is to calculate the actual size of holes on t
 
 ## Circle Detection Results
 
-********* Dircle Detection Results **********
+
+### 1. Hough Circle Detection
+The primary objective of this task is to detect the circles in the RGB image, which corresponds to the holes on the object. This is enabled by first converting the RGB image to grey image, followed by applying median blur to remove sharp edges and shiny objects in the image, finally, hough circle detection algorithm with hough gradient is used to identify the circles on the RGB image. The parameters for the hough circles that are detected are determined based on a trial and error method. Since the camera provides a live stream of data at 30fps, the hough algorithm is applied to each individual frame separately. The detected circles are shown in Figure 3
+
+<div align="center">
+<img src="./docs/circle_detect.gif" width="400" height="200">
+<br>Figure 3: Hough Circle Detection<br>
+</div>
+
+### 2. Circle Actual Size Calculator
+
+The primary objective of this task is to calculate the actual size of holes on the part using RGBand  depth  images.   First,  the  RGB  image  was  aligned  on  the  Depth  image  using  the  RealSense library.  Later,  the Hough Circle detection method was applied on the aligned RGB image,  and points on the circle were achieved.  By utilizing the depth data, converted the points on the RGB image to the cloud points.  Finally, we calculated the average distances of the corresponding points.The calculated size of the detected holes shown in Figure 4.  There is ± 0.1 mm tolerance between actual size of the hole and the predicted one.
+
+<div align="center">
+<img src="./docs/circle_size1.gif" width="400" height="200">
+<br>Figure 4: Calculated size of the Hole<br>
+</div>
 
 
 # Discussion & Future work
