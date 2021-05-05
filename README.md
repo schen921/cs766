@@ -158,7 +158,19 @@ The primary objective of this task is to calculate the actual size of holes on t
 
 # Discussion & Future work
 
-Discussion
+In this project, we developed a real-time object detection solution optimized for limited hardware that has capabilities in circle detection and circle size measurements. Transfer Learning methods and Hough Transform based detection and calculation methods are the backbone of this project. We reached an acceptable performance for on-board real-time object detection (~30 fps) and achieved accurate results for real-time circle detection and circle size measurements with high precision within ± 0.1mm. From this project, we learned the following things through transfer learning:
+
+- Transfer learning is best applied when the model has been trained on vastly bigger training set than could be acquired for the destination task.
+- The model may be prone to overfitting with transfer learning, and data augmentation may not always solve overall problem.
+
+With our current acheivements, we think we could still polish our works in the following ways:
+
+- Polish the area of interest recognition for better stability
+- Expand the training and testing dataset for better accuracy
+- Fine tune in training parameters
+
+In general, the project had been successful with all parts completed as planned and the performance and results delivered meets our expectation. We wish to keep working on further improvements to make it a more stable, reliable and high-performance real time object detection pipeline solution that applied to ROS and other systems.
+
 
 # References
 
