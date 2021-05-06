@@ -126,7 +126,7 @@ The primary objective of this task is to calculate the actual size of holes on t
 </div>
 
 <div align="center">
-<img src="./docs/cloud_pts.png" width="400" height="400">
+<img src="./docs/cloud_pts.PNG" width="400" height="400">
 <br>Figure 10: Cloud Points of the RGB and Depth images<br>
 </div>
 
