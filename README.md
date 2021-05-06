@@ -7,7 +7,9 @@
  {schen658, ssadeghian, vselvaraj}@wisc.edu
 </div>
 
-Important Note: Open this website by cliking the linke in submission to view the moveable .GIFs. The website propagated through Canvas does not show the GIF movements.
+# Important Note
+
+Open this website by cliking the linke in submission to view the moveable .GIFs. The website propagated through Canvas does not show the GIF movements.
 
 # Introduction
 
