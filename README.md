@@ -7,6 +7,8 @@
  {schen658, ssadeghian, vselvaraj}@wisc.edu
 </div>
 
+Important Note: Open this website by cliking the linke in submission to view the moveable .GIFs. The website propagated through Canvas does not show the GIF movements.
+
 # Introduction
 
 Mobile robots with the capabilities to carry out fundamental manufacturing operations could have a huge impact in the way parts are produced. Especially in the cases where conventional manufacturing is difficult; moreover, mobile robots could collaborate with each other enabling networked task sharing and task scheduling .  The new ability makes this type of mobile robot superior compared to AGVs or mobile robots without arms, which leads to an increase in their applications in modern industry. Obstacle and collision avoidance, object detection and estimating their size, ability to detected the center of the holes and their diameter are some of the challenges in this approach. To address these challenges, our project is aiming to develope a capable object-detection suite that runs on swarm mobile robots and delivers decent performance given the robots' form factor and hardware. The objects detected here are mostly customed parts, which requires customly trained models for detection. In this case, the models used in this context needs to be easily expandable without loosing detection accuracies.
