@@ -2,7 +2,7 @@
 <div align="center">
  <font size="20"> Object Detection for Swarm Mobile Robots using Computer Vision
 </font><br>
- <font size="14">Siyang Chen, Sina Sadeghian, Vignesh Selvaraj</font><br>
+ <font size="12">Siyang Chen, Sina Sadeghian, Vignesh Selvaraj</font><br>
  University of Wisconsin-Madison<br>
  {schen658, ssadeghian, vselvaraj}@wisc.edu
 </div>
@@ -68,7 +68,7 @@ Our project employes a software suite that creates a scaleable realtime-capable 
 
 <div align="center">
 <img src="./docs/workflow.png" width="600" height="200">
-<br>Figure 2: Object Detection Software Suite Workflow<br>
+<br>Figure 5: Object Detection Software Suite Workflow<br>
 </div>
 
 ## Performance Optimization
@@ -91,7 +91,7 @@ where (a,b) is the center of the circle, and r is the radius. If a 2D point (x,y
 
 <div align="center">
 <img src="./docs/Hough_circ.png" width="300" height="300">
-<br>Figure 3: Center and Radius of circle on x-y axises<br>
+<br>Figure 6: Center and Radius of circle on x-y axises<br>
 </div>
 
 * ## Find parameters with known radius R
@@ -100,7 +100,7 @@ If the radius is fixed, then the parameter space would be reduced to 2D (the pos
 
 <div align="center">
 <img src="./docs/hough_circ_2.png" width="400" height="200">
-<br>Figure 4: (x,y) coordinates in 3D space<br>
+<br>Figure 7: (x,y) coordinates in 3D space<br>
 </div>
 
 * ## Accumulator matrix and voting
@@ -111,23 +111,23 @@ After voting, we can find local maxima in the accumulator matrix. The positions 
 <div align="center">
 <img src="./docs/hough_many_circ.PNG" width="400" height="300">
  <img src="./docs/hough_many_circ2.PNG" width="400" height="300">
-<br>Figure 5: Accumulator of many Circles<br>
+<br>Figure 8: Accumulator of many Circles<br>
 </div>
 
 
 # Hole Size Calculation
 
-The primary objective of this task is to calculate the actual size of holes on the part using RGB and depth images. First, the RGB image were aligned on the Depth image using the RealSense library. Later, the Hough Circle detection method was applied on the aligned RGB image. Then, we defined a boundary on each side of the circle and used average distance of each points on the boundary to aligning the camera with the hole. Points on the circle achieved using Hough data are shown in Figure x. By utilizing the depth data, we converted the points on the RGB image to the cloud points as shown in Figure x. Finally, we calculated the average distances of the corresponding points. 
+The primary objective of this task is to calculate the actual size of holes on the part using RGB and depth images. First, the RGB image were aligned on the Depth image using the RealSense library. Later, the Hough Circle detection method was applied on the aligned RGB image. Then, we defined a boundary on each side of the circle and used average distance of each points on the boundary to aligning the camera with the hole. Points on the circle achieved using Hough data are shown in Figure 9. By utilizing the depth data, we converted the points on the RGB image to the cloud points as shown in Figure 10. Finally, we calculated the average distances of the corresponding points. 
 
 
 <div align="center">
 <img src="./docs/circle_dots.png" width="300" height="300">
-<br>Figure 3: Cooresponding points on the circle<br>
+<br>Figure 9: Cooresponding points on the circle<br>
 </div>
 
 <div align="center">
 <img src="./docs/circle_dots.png" width="400" height="200">
-<br>Figure 3: Cloud Points of the RGB and Depth images<br>
+<br>Figure 10: Cloud Points of the RGB and Depth images<br>
 </div>
 
 
@@ -136,48 +136,48 @@ The primary objective of this task is to calculate the actual size of holes on t
 
 ## Transfer Learning Results
 
-We performed transfer learning on the Mask R-CNN mocdel and is able to reach a high accuracy with low loss values as indicated in Figure X. The sample classification on our target object is shown in Figure X. We were able to detect the object with stable bounding boxes in decent frame rates. The result for real-time target object detection using the transfer learning model we trained is shown in Figure X.
+We performed transfer learning on the Mask R-CNN mocdel and is able to reach a high accuracy with low loss values as indicated in Figure 11. The sample classification on our target object is shown in Figure 12. We were able to detect the object with stable bounding boxes in decent frame rates. The result for real-time target object detection using the transfer learning model we trained is shown in Figure 13.
 
 <div align="center">
 <img src="./docs/TF_results.png" width="800" height="100">
-<br>Figure 3: Transfer Learning Results <br>
+<br>Figure 11: Transfer Learning Results <br>
 </div>
 
 The key thing to be aware of in the results above is that, we are primarily concerned about the "mrcnn_class_loss" and the "mrcnn_bbox_loss". The "mrcnn_class_loss" corresponds to the ability of the model to identify the class of the object in the frame accurately. The "mrcnn_bbox_loss" corresponds to the ability of the model to place the bounding boxes around the identified objects accurately. The third one, "mrcnn_mask_loss", is the ability of the model to create a mask around the object accurately. This is the highest of all three losses mainly because in our case we are not concerned about the model's ability to create the masks accurately, we are only looking for the model's ability to identify the object and a create a bounding box around it. Hence while training, the backpropagation updates to the branches of the model that involve creating the mask has been omitted during the training process.
 
 <div align="center">
-<img src="./docs/model_prediction_results/04.png" width="400" height="200">
-<br>Figure 3: Detection on Target Object with Bounding Box<br>
+<img src="./docs/model_prediction_results/04.png" width="500" height="400">
+<br>Figure 12: Detection on Target Object with Bounding Box<br>
 </div>
 
 <div align="center">
-<img src="./docs/object_detection.gif" width="400" height="200">
-<br>Figure 3: Object detection results<br>
+<img src="./docs/detected_target.gif" width="500" height="400">
+<br>Figure 13: Detected Target Results<br>
 </div>
 
 ## Object Detection Results
 
-The output of our object detection software suite is shown in Figure x below. The pipeline creates a stream of frames at decent frame rate (approximately ~30 fps when using smaller models) without significant lost in classification accuracy. This frame rate makes the object detection useable to keep track of our target object and avoid potential obstacles. The resolution delivered is also fairly well given the harware resources that our software utilizes. The bounding boxes are accurate and has good tracking capabilities with the movements between frames, indicating a stable and well-performed model working in the background. With the performance optimization mechanisms in place this 30 fps peak frame rate is approximately performing ~10x better without opimizations.
+The output of our object detection software suite is shown in Figure 14 below. The pipeline creates a stream of frames at decent frame rate (approximately ~30 fps when using smaller models) without significant lost in classification accuracy. This frame rate makes the object detection useable to keep track of our target object and avoid potential obstacles. The resolution delivered is also fairly well given the harware resources that our software utilizes. The bounding boxes are accurate and has good tracking capabilities with the movements between frames, indicating a stable and well-performed model working in the background. With the performance optimization mechanisms in place this 30 fps peak frame rate is approximately performing ~10x better without opimizations.
 
 <div align="center">
-<img src="./docs/object_detection.gif" width="400" height="200">
-<br>Figure 3: Object detection results<br>
+<img src="./docs/object_detection.gif" width="500" height="400">
+<br>Figure 14: Object detection results<br>
 </div>
 
 ## Circle Detection Results
 
 
 ### 1. Hough Circle Detection
-The primary objective of this task is to detect the circles in the RGB image, which corresponds to the holes on the object. This is enabled by first converting the RGB image to grey image, followed by applying median blur to remove sharp edges and shiny objects in the image, finally, hough circle detection algorithm with hough gradient is used to identify the circles on the RGB image. The parameters for the hough circles that are detected are determined based on a trial and error method. Since the camera provides a live stream of data at 30fps, the hough algorithm is applied to each individual frame separately. The detected circles are shown in Figure 3
+The primary objective of this task is to detect the circles in the RGB image, which corresponds to the holes on the object. This is enabled by first converting the RGB image to grey image, followed by applying median blur to remove sharp edges and shiny objects in the image, finally, hough circle detection algorithm with hough gradient is used to identify the circles on the RGB image. The parameters for the hough circles that are detected are determined based on a trial and error method. Since the camera provides a live stream of data at 30fps, the hough algorithm is applied to each individual frame separately. The detected circles are shown in Figure 15
 
 <div align="center">
 <img src="./docs/circle_detect.gif" width="400" height="400">
-<br>Figure 3: Hough Circle Detection<br>
+<br>Figure 15: Hough Circle Detection<br>
 </div>
 
 ### 2. Circle Actual Size Calculator
 
-Figure x shows the calculated size of holes and their actual values. There is ± 0.1 mm tolerance between actual size of the hole and the predicted one. Therefore, the results look stable with low standard deviation. By tuning the Hough Circle detection parameters, circle detection could be improved, moreover, calibrating the camera would enhance the hole size detection.
+Figure 16 shows the calculated size of holes and their actual values. There is ± 0.1 mm tolerance between actual size of the hole and the predicted one. Therefore, the results look stable with low standard deviation. By tuning the Hough Circle detection parameters, circle detection could be improved, moreover, calibrating the camera would enhance the hole size detection.
 
 <div align="center">
 <img src="./docs/circle_size1.gif" width="500" height="200">
@@ -186,7 +186,7 @@ Figure x shows the calculated size of holes and their actual values. There is ±
 <div align="center">
 <img src="./docs/circle_size2.gif" width="500" height="200">
 <img src="./docs/circle_size_ac2.png" width="300" height="200">
-<br>Figure 4: Calculated size of the Hole<br>
+<br>Figure 16: Calculated size of the Hole<br>
 </div>
 
 # Discussion & Future work
@@ -207,7 +207,7 @@ In general, the project had been successful with all parts completed as planned 
 
 # References
 
-[1] X
+[1] https://en.wikipedia.org/wiki/Circle_Hough_Transform
 
 
 
